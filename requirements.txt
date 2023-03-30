@@ -1,0 +1,3 @@
+faker
+django==4.1.7
+django_extensions

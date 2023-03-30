@@ -1,0 +1,58 @@
+{#<form method="get" action="{% url 'search_names' %}">#}
+{#    {{ form.as_p }}#}
+{#    <button type="submit">Search</button>#}
+{#</form>#}
+{##}
+{#{% if names %}#}
+{#    <ul>#}
+{#    {% for name in names %}#}
+{#        <li>{{ name.name }}</li>#}
+{#    {% endfor %}#}
+{#    </ul>#}
+{#{% endif %}#}
+
+<form method="get" id="search-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="selected_names" id="selected-names-input">
+    <button type="submit" id="submit-button" disabled>Submit</button>
+</form>
+
+<div id="search-results"></div>
+
+<h2>Selected Names</h2>
+<ul id="selected-names"></ul>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(function() {
+    $('#search-form').on('keyup', function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: '{% url "search_names" %}',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(data) {
+                let results = $.map(data, function(obj) {
+                    {#return '<li>' + obj.name + '</li>';#}
+                     return '<li data-name="' + obj.name + '">' + obj.name + '</li>';
+                });
+                $('#search-results').html('<ul>' + results.join('') + '</ul>');
+            }
+        });
+    });
+    $('#search-results').on('click', 'li', function() {
+        let name = $(this).data('name');
+        $('#selected-names').append('<li>' + name + '</li>');
+
+        {#selected names will be passed #}
+        $('#selected-names-input').val(function(index, value) {
+            return value + (value ? ',' : '') + name;
+        });
+        $('#submit-button').prop('disabled', false);
+    });
+});
+</script>
+
+
+
