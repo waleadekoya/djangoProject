@@ -45,9 +45,9 @@ $(function() {
         let name = $(this).data('name');
         $('#selected-names').append('<li>' + name + '</li>');
 
-        {#selected names will be passed #}
+        {#selected names will be passed to the view handling this template#}
         $('#selected-names-input').val(function(index, value) {
-            return value + (value ? ',' : '') + name;
+            return value + (value ? ',,' : '') + name;
         });
         $('#submit-button').prop('disabled', false);
     });

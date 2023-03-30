@@ -14,6 +14,6 @@ def search_names(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         data = [{'name': name.name} for name in names]
         return JsonResponse(data, safe=False)
-    selected_names = request.GET.get('selected_names', '').split(',')
+    selected_names = request.GET.get('selected_names', '').split(',,')
     print(selected_names)
     return render(request, 'search_names.html', {'form': form, 'names': names})
