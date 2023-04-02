@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% csrf_token %}
+</head>
+<body>
+<h1>Ajax Tutorial</h1>
+<form>
+    <label for="name">Enter your name:</label>
+    <input type="text" id="name" name="name">
+    <button type="submit">Submit</button>
+</form>
+<div id="result"></div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+         $.ajaxSetup({
+            headers: { 'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val()  }
+        });
+        // Add event listener to the submit button in the form - when clicked, the event listener is triggered
+        $('form').submit(function (event) {
+            event.preventDefault(); // prevent the default form submission behavior
+            // Get the value of the inout field using jQuery's `val()` method
+            let name = $('#name').val();
+            // Add Ajax request using jQuery's `ajax()` method.
+            // This method takes an object as an argument, which includes the
+            // a) URL to send the request to, b) the HTTP method to use, and c) any data to send with the request.
+            $.ajax({
+                url: '{% url "ajax" %}',
+                type: 'POST',
+                data: {
+                    'name': name
+                },
+                success: function (response) {
+                    // Handle the response here
+                    // In the success callback function, display the response from the server in the HTML document
+                    $('#result').text(response.message);
+                }
+            })
+
+        });
+    })
+</script>
+</html>

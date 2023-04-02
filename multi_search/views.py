@@ -17,3 +17,14 @@ def search_names(request):
     selected_names = request.GET.get('selected_names', '').split(',,')
     print(selected_names)
     return render(request, 'search_names.html', {'form': form, 'names': names})
+
+
+def index(request):
+    return render(request, 'index.html')
+
+
+def ajax_view(request):
+    name = request.POST.get('name')
+    message = f'Hello, {name}!'
+    # return a JSON response containing the data received from the Ajax request
+    return JsonResponse({'message': message})

@@ -1,0 +1,134 @@
+/* Style the search form */
+#search-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+#search-form label {
+    margin-right: 0.5rem;
+}
+
+#search-form input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    font-size: 1rem;
+    flex: 1;
+}
+
+#search-form button {
+    background-color: #0077b6;
+    color: #fff;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+#search-form button:disabled {
+    background-color: #ccc;
+    color: #333;
+}
+
+/* Style the search results */
+#search-results {
+    margin-top: 1rem;
+}
+
+#search-results ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    background-color: #fff;
+    border: 1px solid #ccc;
+    /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+    /*z-index: 999;*/
+    /*position: absolute;*/
+    width: 100%;
+}
+
+#search-results li {
+    padding: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif
+    /*font-family: Arial, Helvetica Neue, Helvetica, sans-serif;*/
+}
+
+#search-results li:hover {
+    background-color: cornflowerblue; /*#f2f2f2;*/
+}
+
+#selected-names {
+    margin-top: 1rem;
+    list-style: none;
+    padding: 0;
+    max-width: 50%;
+    display: none; /* Hides element from users */
+}
+
+#selected-names li {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 1rem auto;
+    max-width: 50%;
+}
+
+button {
+    background-color: #0077b6;
+    color: #fff;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+/* Style the selected names */
+#selected-names li mark {
+    background-color: transparent;
+    color: blue;
+    font-weight: bold;
+}
+
+/* Position the selected names window */
+#selected-names-window {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #343a40;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 1rem;
+    position: fixed;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    animation: floatWindow 0.5s ease-in-out alternate infinite;
+}
+
+#selected-names-window p {
+    margin: 0;
+    padding: 0.5rem;
+}
+
+@keyframes floatWindow {
+    from {
+        transform: translateY(-50%);
+    }
+    to {
+        transform: translateY(-51%);
+    }
+}
