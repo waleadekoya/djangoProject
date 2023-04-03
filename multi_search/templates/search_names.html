@@ -22,11 +22,11 @@
     <div id="search-results"></div>
 
     <br>
-{#    <hr>#}
+    {#    <hr>#}
     <div id="selected-names-window"></div>
     <hr>
 
-{#    <h2>Selected Names</h2>#}
+    {#    <h2>Selected Names</h2>#}
     <ul id="selected-names"></ul>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/search_names.css' %}">
@@ -36,29 +36,28 @@
         $(function () {
             //  $('#search-form') means look for and return the element with id="search-form"
             $('#search-form').on('keyup', function (event) {
-                event.preventDefault(); // this prevents the default html behaviour
+                event.preventDefault(); // this line prevents the default html behaviour
+
                 $.ajax({
                     url: '{% url "search_names" %}',
                     data: $(this).serialize(),
                     dataType: 'json',
                     success: function (data) {
-                        let results = $.map(data, function (obj) {
-                            {#return '<li>' + obj.name + '</li>';#}
-                            return '<li data-name="' + obj.name + '">' + obj.name + '</li>';
-                        });
+                        let results = data.map(obj => `<li data-name="${obj.name}">${obj.name}</li>`);
                         $('#search-results').html('<ul>' + results.join('') + '</ul>');
                     }
                 });
             });
             $('#search-results').on('click', 'li', function () {
                 let name = $(this).data('name');
-                // Add the selected name to the list (if it doesn't already exist in the list)
+
+                // Add the selected name to the list (if not already exist in the list)
                 if ($('#selected-names li:contains("' + name + '")').length === 0) {
                     $('#selected-names').append('<li><mark>' + name + '</mark></li>');
                     $('#selected-names-window').append('<p><strong>' + name + '</strong></p>');
                 }
 
-                {#selected names will be passed to the view handling this template#}
+                // selected names is passed to the view handling this template
                 $('#selected-names-input').val(function (index, value) {
                     return value + (value ? ',,' : '') + name;
                 });

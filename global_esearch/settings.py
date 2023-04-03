@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'multi_search',
+    'profiles',
     'django_extensions',
 ]
 
@@ -56,7 +57,11 @@ ROOT_URLCONF = 'global_esearch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [Path(BASE_DIR, 'multi_search/templates')],
+        'DIRS': [
+            BASE_DIR / 'multi_search/templates',
+            BASE_DIR / 'templates',
+            BASE_DIR / 'profiles/templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,7 +124,17 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# This tells Django where to search for static files
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+    BASE_DIR / 'multi_search/static',
+    BASE_DIR / 'profiles/static'
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
