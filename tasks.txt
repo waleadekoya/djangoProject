@@ -1,0 +1,27 @@
+Title: Allow users to generate multiple reports from the UI
+
+Description: Currently, users can only generate one report at a time from the Django UI. To improve user experience and productivity, we need to add functionality that allows users to generate multiple reports at once.
+
+This will require changes to the backend logic of the application to allow for the processing of multiple requests concurrently, as well as updates to the UI to provide users with the ability to select and generate multiple reports.
+
+Tasks:
+
+Update backend logic to handle multiple report requests concurrently.
+Update UI to allow users to select multiple reports for generation.
+Add validation to ensure user inputs are valid before generating reports.
+Update UI to provide feedback on the progress of report generation.
+Add ability to download all generated reports as a zip file.
+Update documentation to reflect new functionality.
+Acceptance Criteria:
+
+Users should be able to select and generate multiple reports concurrently.
+The backend should be able to handle multiple report requests without issues.
+User inputs should be validated to prevent errors in report generation.
+Users should be provided with feedback on the progress of report generation.
+All generated reports should be downloadable as a zip file.
+Documentation should be updated to reflect the new functionality.
+Priority: High
+
+Estimate: 2 weeks
+
+Assignee: [Insert Assignee Name Here]
